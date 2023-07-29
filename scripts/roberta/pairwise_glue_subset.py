@@ -16,14 +16,15 @@ import os
 
 for seed in [1, 2, 3, 4, 5]:
     for task in ["cola", "sst2", "mrpc", "stsb", "mnli", "qnli", "qqp", "rte"]:
-        os.system(
-            f"python -m src.run_experiments --config_file src/configs/defaults.yaml src/configs/datasets/subests/glue_partition_1k_niid.yaml src/configs/exps/roberta-base/subset/rb-1k-whead.yaml --templates seed={seed} dataset_name={task}"
-        )
+        # os.system(
+        #     f"python -m src.run_experiments --config_file src/configs/defaults.yaml src/configs/datasets/subsets/glue_partition_1k_niid.yaml src/configs/exps/roberta-base/subset/rb-1k-whead.yaml --templates seed={seed} dataset_name={task}"
+        # )
         # fisher
         os.system(
-            f"python -m src.run_experiments --config_file src/configs/defaults.yaml src/configs/datasets/subests/glue_partition_1k_niid.yaml src/configs/exps/roberta-base/subset/rb-1k-fisher-whead.yaml --templates seed={seed} dataset_name={task}"
+            f"python -m src.run_experiments --config_file src/configs/defaults.yaml src/configs/datasets/subsets/glue_partition_1k_niid.yaml src/configs/exps/roberta-base/subset/rb-1k-fisher-whead.yaml --templates seed={seed} dataset_name={task}"
         )
-        # regmean
-        os.system(
-            f"python -m src.run_experiments --config_file src/configs/defaults.yaml src/configs/datasets/subests/glue_partition_1k_niid.yaml src/configs/exps/roberta-base/subset/rb-1k-regmean-whead.yaml --templates seed={seed} dataset_name={task}"
-        )
+        # # regmean
+        # os.system(
+        #     f"python -m src.run_experiments --config_file src/configs/defaults.yaml src/configs/datasets/subsets/glue_partition_1k_niid.yaml src/configs/exps/roberta-base/subset/rb-1k-regmean-whead.yaml --templates seed={seed} dataset_name={task}"
+        # )
+        exit()
