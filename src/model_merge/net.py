@@ -326,6 +326,9 @@ def compute_bce_loss(
 
 
 class RoBERTaForMultiLabelClassification(RobertaForSequenceClassification):
+    '''
+    why rewrite?
+    '''
     def forward(
         self,
         input_ids=None,

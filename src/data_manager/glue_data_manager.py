@@ -60,6 +60,9 @@ class GLUEDataManager(SimpleDataManager):
         super().__init__(config, tokenizer)
 
     def update_model_config(self, model_config):
+        '''
+        change the model label config
+        '''
         raw_datasets = load_dataset(
             "glue",
             model_config.dataset_name,
@@ -222,6 +225,7 @@ class GLUEDataManager(SimpleDataManager):
         seed = self.get_partition_seed(model_config)
         if self.partitions is None:
             # prepare partitions
+            # get a random subset of given amount
             train_ds_subset = get_random_subset(
                 train_dataset, seed, self.config.partition.n_total_examples
             )

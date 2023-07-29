@@ -54,6 +54,12 @@ from .misc import filter_modules_by_regex
 
 
 class MyModelTrainer(Trainer):
+    '''
+    rewrite trainer to add
+    1. multi-task learning
+    2. fisher information matrix computation 
+    3. ngram computation (for regmean)
+    '''
     def __init__(
         self,
         model,
@@ -281,6 +287,9 @@ class MyModelTrainer(Trainer):
                 param.data.zero_()
 
     def compute_grams(self, config, model_config):
+        '''
+        core function
+        '''
         train_dataloader = self.get_train_dataloader()
         covs = {}
         xn = {}

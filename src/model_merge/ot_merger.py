@@ -24,7 +24,7 @@ from .misc import filter_modules_by_regex
 from .net import create_model
 from .ot_utils.ot_ground_metric import GroundMetric
 
-
+# why create this class
 class TmpLocalModel(nn.Module):
     def __init__(self, model):
         super().__init__()
@@ -91,6 +91,7 @@ class OptimalTransportMerger(FedAvgMerger):
 
     def match_ffns(self, ffns, tgt_ffn, ot_pattern):
         # input: list of ffns, on for each local model (a and b)
+        # ffns is a list of parameters
         assert len(ffns) == 2
         eps = 1e-10
         layers = [
@@ -128,8 +129,8 @@ class OptimalTransportMerger(FedAvgMerger):
 
             T_var = torch.from_numpy(T).float().to(w_a.device)
 
-            if self.ot_params.debug:
-                logging.info("The trace of T is {}".format(T_var.trace()))
+            # if self.ot_params.debug:
+            #     logging.info("The trace of T is {}".format(T_var.trace()))
 
             if self.ot_params.correction:
                 if not self.ot_params.proper_marginals:

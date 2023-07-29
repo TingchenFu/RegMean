@@ -57,7 +57,10 @@ def main(args):
     )
     logging.info(config)
 
-    check_and_get_remote_resources(config)
+    exit()
+
+    # Not implemented yet
+    #check_and_get_remote_resources(config)
 
     # metrics logger
     logger = logging.getLogger("metrics")
@@ -79,6 +82,8 @@ def main(args):
             config.tokenizer, add_prefix_space=config.tokenizer_add_prefix_space
         )
 
+    # the data manager 
+    # here is the glue data manager
     dm = get_dm_class(config.dataset, seq2seq=config.seq2seq)(
         config, tokenizer=tokenizer
     )

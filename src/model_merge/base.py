@@ -343,6 +343,9 @@ class ModelMergeExp:
             local_model.train_if_needed()
 
     def single_round(self, save_results=True, merger_options=None):
+        '''
+        do not search coeff
+        '''
         met = {}
         merger_options = {} if merger_options is None else merger_options
         self.train_local_models_if_needed()

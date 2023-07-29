@@ -120,7 +120,10 @@ class FedAvgMerger(ModelMergerBase):
         return ret
 
     def regmean_mean_params(self, all_params, all_grams, model_coeffs=None):
+        # param is a dict of list  param[name] is list of N elements, N is the number of local model. 
+        # gram is a list of dict each list represents a single local model.
         # here param is dict(list) but all_grams is list(dict) -- why did i write in this way
+        # the core function
         avg_params = {}
         n_model = len(all_grams)
         # special treatments for linear weight params
@@ -168,7 +171,7 @@ class FedAvgMerger(ModelMergerBase):
                             )
 
                         grams.append(param_grams)
-                    sum_cov = sum(grams)
+                    sum_cov = sum(grams)  # sum over model
                     sum_gram_m_ws = sum(gram_m_ws)
                     sum_cov_inv = torch.inverse(sum_cov)
                     wt = torch.matmul(sum_cov_inv, sum_gram_m_ws)
@@ -195,6 +198,9 @@ class FedAvgMerger(ModelMergerBase):
         return avg_params
 
     def deliver_to_local(self):
+        '''
+        copy/distribute the gloabl model to the local model
+        '''
         n2p = {k: v for k, v in self.global_model.named_parameters()}
         merge_param_names = filter_params_to_merge(
             [n for n in n2p], self.merger_config.exclude_param_regex
